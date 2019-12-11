@@ -1,0 +1,22 @@
+pipeline {
+    agent none
+    stages {
+        stage('Build Proxy to Spec') {
+            agent {
+                docker { image 'chronos085/node-apigee:8-alpine' }
+            }
+            steps {
+                sh 'ls'
+                sh 'git status'
+                sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
+                sh 'apigeelint -s /apigee/proxy/apiproxy -f table.js'
+                sh 'git status'
+                sh 'git add apigee'
+                sh 'git status'
+                sh 'ls'
+                sh 'git commit -a -m "proxy commit"'
+                sh 'git push -u origin master'
+            }
+        }
+    }
+}
