@@ -9,7 +9,7 @@ pipeline {
                 sh 'ls'
                 sh 'git status'
                 sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
-                sh 'apigeelint -s /apigee/proxy/apiproxy -f table.js'
+                sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                 sh 'git status'
                 sh 'git add apigee'
                 sh 'git status'
