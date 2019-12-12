@@ -15,7 +15,7 @@ pipeline {
                 sh 'git status'
                 sh 'ls'
                 sh 'git commit -a -m "proxy commit"'
-                sh 'git push origin HEAD:master'
+                sh 'git push origin master'
             }
         }
     }
