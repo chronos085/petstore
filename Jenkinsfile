@@ -14,7 +14,7 @@ pipeline {
                 sh 'git add apigee'
                 sh 'git status'
                 sh 'ls'
-                sh 'git commit -a -m "proxy commit"'
+                sh 'git commit -m "proxy commit"'
                 sh 'git push origin master'
             }
         }
