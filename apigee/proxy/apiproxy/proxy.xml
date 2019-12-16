@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<APIProxy revison="1" name="proxy">
+  <CreatedAt>1576527848</CreatedAt>
+  <Description>Swagger Petstore</Description>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+  <TargetEndpoints>
+    <TargetEndpoint>default</TargetEndpoint>
+  </TargetEndpoints>
+</APIProxy>
