@@ -13,9 +13,7 @@ pipeline {
                 sh 'git status'
                 sh 'git commit -m "proxy commit"'
                 sh 'git status'
-                sh 'git reset HEAD apigee'
-                sh 'git status'
-                //sh 'git push -u origin master'
+                sh 'git push -u origin master'
             }
         }
     }
