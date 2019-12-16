@@ -10,7 +10,6 @@ pipeline {
                 sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                 sh 'git add apigee'
                 sh 'git commit -m "proxy commit"'
-                sh 'git remote add origin https://github.com/chronos085/petstore.git'
                 sh 'git push -u origin master'
             }
         }
