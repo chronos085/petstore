@@ -6,6 +6,7 @@ pipeline {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
             steps {
+                sh 'git status'
                 sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
                 sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                 sh 'git add -A apigee'
@@ -13,6 +14,7 @@ pipeline {
                 sh 'git commit -m "proxy commit"'
                 sh 'git status'
                 sh 'git reset HEAD apigee'
+                sh 'git status'
                 //sh 'git push -u origin master'
             }
         }
