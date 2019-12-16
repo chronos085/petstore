@@ -7,7 +7,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
-                    echo ${env.BUILD_NUMBER}
+                    echo ${BUILD_NUMBER}
                     //sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
                     //sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                     //sh 'git add -A apigee'
