@@ -10,7 +10,8 @@ pipeline {
                 sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                 sh 'git add apigee'
                 sh 'git commit -m "proxy commit"'
-                sh 'git push --all origin'
+                sh 'git pull --rebase origin master'
+                sh 'git push -u origin master'
             }
         }
     }
