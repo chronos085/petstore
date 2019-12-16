@@ -13,7 +13,7 @@ pipeline {
                 sh 'git status'
                 sh 'git commit -m "proxy commit"'
                 sh 'git status'
-                sh 'git push https://chronos085:naruto2022@github.com/chronos085/petstore.git'
+                sh 'git push https://chronos085:naruto2022@github.com/chronos085/petstore.git HEAD:master'
             }
         }
     }
