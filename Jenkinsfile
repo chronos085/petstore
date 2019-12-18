@@ -27,6 +27,8 @@ pipeline {
                     sh 'git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/ci-apigee.git'
                     sh 'cp -r ci-apigee/maven/pom.xml apigee/proxy'
                     sh 'cp -r ci-apigee/maven/shared-pom.xml apigee/proxy'
+                    sh 'mkdir -p apigee/proxy/target'
+                    sh 'mkdir -p apigee/proxy/target/apiproxy'
                     sh 'mvn -f apigee/proxy/pom.xml package -Pbuild -Doptions=inactive'
                 }
             }
