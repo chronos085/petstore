@@ -30,6 +30,10 @@ pipeline {
                     sh 'mkdir -p apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
                     sh 'mvn -f apigee/proxy/pom.xml package -Pbuild -Doptions=inactive'
+                    sh 'git add -A apigee'
+                    sh 'git commit -m "proxy commit"'
+                    sh 'git tag -a petstore-$BUILD_NUMBER -m "Jenkins"'
+                    sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master  --tags'
                 }
             }
         }
