@@ -1,0 +1,73 @@
+{
+    "version": "1.0",
+    "envConfig": {
+        "sandbox": {
+            "targetServers": [],
+            "virtualHosts": [],
+            "caches": [],
+            "kvms": [],
+            "extensions":[]
+        }
+    },
+    "orgConfig": {
+        "maskconfigs": [],
+        "apiProducts": [
+            {
+                "name": "product-reservation",
+                "displayName": "product-reservation",
+                "description": "Reservation Product",
+                "apiResources": [
+                    "/**"
+                ],
+                "approvalType": "auto",
+                "attributes": [
+                    {
+                        "name": "developer.quota.limit",
+                        "value": "10"
+                    },
+                    {
+                        "name": "developer.quota.interval",
+                        "value": "1"
+                    },
+                    {
+                        "name": "developer.quota.timeunit",
+                        "value": "hour"
+                    }
+                ],
+                "environments": [
+                    "sandbox"
+                ],
+                "proxies": [
+                    "sandbox-reservation"
+                ],
+                "quota": "10",
+                "quotaInterval": "1",
+                "quotaTimeUnit": "hour",
+                "scopes": []
+            }
+        ],
+        "developers": [
+            {
+                "attributes": [],
+                "email": "mponce@apiservice.cl",
+                "firstName": "Mauricio",
+                "lastName": "Ponce",
+                "userName": "mponce"
+            }
+        ],
+        "developerApps": {
+            "mponce@apiservice.cl": [
+                {
+                    "name": "app-reservation",
+                    "apiProducts": [
+                        "product-reservation"
+                    ],
+                    "callbackUrl": "",
+                    "scopes": []
+                }
+            ]
+        },
+        "kvms": []
+    },
+    "apiConfig": {}
+}
