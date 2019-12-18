@@ -8,6 +8,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
+                    sh 'rm -rf apigee/proxy/apiproxy.zip'
                     sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                     sh 'git add -A apigee'
                     sh 'git commit -m "proxy commit"'
