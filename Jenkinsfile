@@ -19,7 +19,7 @@ pipeline {
         }*/
         stage('Build Proxy to Maven') {
             agent {
-                docker { image 'maven:3-alpine' }
+                docker { image 'chronos085/maven-apigee:3-alpine' }
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
