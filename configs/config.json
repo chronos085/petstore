@@ -11,11 +11,8 @@
                             "xpath": "/ProxyEndpoint/HTTPProxyConnection/BasePath",
                             "value": "/petstore"
                         },{
-                            "xpath": "/ProxyEndpoint/HTTPProxyConnection/VirtualHost",
-                            "value": "sandbox"
-                        },{
-                            "xpath": "/ProxyEndpoint/PreFlow/Request/Step/Name",
-                            "value": "sf-security-oauth"
+                            "xpath": "/ProxyEndpoint/PreFlow/Request",
+                            "value": "<Step><Name>sf-security-oauth</Name></Step>"
                         }
                     ]
                 }
