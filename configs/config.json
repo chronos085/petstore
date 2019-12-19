@@ -9,7 +9,7 @@
                     "tokens": [
                         {
                             "xpath": "/ProxyEndpoint/HTTPProxyConnection/VirtualHost",
-                            "value": "secure"
+                            "value": "sandbox"
                         },{
                             "xpath": "/ProxyEndpoint/PreFlow/Request/Step/Name",
                             "value": "sf-security-oauth"
