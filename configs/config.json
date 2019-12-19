@@ -12,6 +12,14 @@
                             "value": "secure"
                         }
                     ]
+                },{
+                    "name": "default.xml",
+                    "tokens": [
+                        {
+                            "xpath": "/ProxyEndpoint/PreFlow/Request/Step/Name",
+                            "value": "sf-security-oauth"
+                        }
+                    ]
                 }
 		],
             "targets": []
