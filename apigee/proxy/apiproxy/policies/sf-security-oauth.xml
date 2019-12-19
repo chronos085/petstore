@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FlowCallout async="false" continueOnError="false" enabled="true" name="sf-security-oauth">
+    <DisplayName>sf-security-oauth</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <SharedFlowBundle>sf-security-oauth</SharedFlowBundle>
+</FlowCallout>

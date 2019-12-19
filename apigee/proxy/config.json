@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "build",
+            "policies": [],
+            "proxies": [
+		{
+                    "name": "default.xml",
+                    "tokens": [
+                        {
+                            "xpath": "/ProxyEndpoint/HTTPProxyConnection/BasePath",
+                            "value": "/petstore"
+                        },{
+                            "xpath": "/ProxyEndpoint/PreFlow/Request",
+                            "value": "<Step><Name>sf-security-oauth</Name></Step>"
+                        }
+                    ]
+                }
+		],
+            "targets": []
+        }
+    ]
+}
