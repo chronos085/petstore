@@ -13,9 +13,9 @@ pipeline {
                     //TEST CODE PROXY
                     sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                     //COMMIT CREATE PROXY
-                    sh 'git add -A apigee'
-                    sh 'git commit -m "proxy commit"'
-                    sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
+                    //sh 'git add -A apigee'
+                    //sh 'git commit -m "proxy commit"'
+                    //sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                 }
             }
         }
