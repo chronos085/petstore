@@ -28,6 +28,8 @@ pipeline {
                     sh 'cp -r ci-apigee/maven/pom.xml apigee/proxy'
                     sh 'cp -r ci-apigee/maven/shared-pom.xml apigee/proxy'
                     sh 'cp -r configs/config.json apigee/proxy'
+                    sh 'mkdir -p apigee/proxy/apiproxy/policies'
+                    sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/sf-security-oauth.xml apigee/proxy/apiproxy/policies'
                     sh 'mkdir -p apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
                     sh 'mvn -f apigee/proxy/pom.xml package -Pbuild -Doptions=inactive'
