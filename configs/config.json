@@ -8,6 +8,9 @@
                     "name": "default.xml",
                     "tokens": [
                         {
+                            "xpath": "/ProxyEndpoint/HTTPProxyConnection/BasePath",
+                            "value": "/petstore"
+                        },{
                             "xpath": "/ProxyEndpoint/HTTPProxyConnection/VirtualHost",
                             "value": "sandbox"
                         },{
