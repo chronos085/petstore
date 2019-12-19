@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
-                    sh 'mvn --version'
+                    sh 'rm -rf ci-apigee'
                     sh 'git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/ci-apigee.git'
                     sh 'cp -r ci-apigee/maven/pom.xml apigee/proxy'
                     sh 'cp -r ci-apigee/maven/shared-pom.xml apigee/proxy'
