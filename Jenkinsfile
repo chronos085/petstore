@@ -47,8 +47,10 @@ pipeline {
             }
         }
         stage('Promotion') {
-            timeout(time: 2, unit: 'DAYS') {
-                input 'Do you want to Approve?'
+            steps {
+                timeout(time: 2, unit: 'DAYS') {
+                    input 'Do you want to Approve?'
+                }
             }
         }
         stage('Deploy Proxy to Enviroment') {
