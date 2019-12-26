@@ -40,7 +40,7 @@ pipeline {
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
                     sh 'mvn -f apigee/proxy/pom.xml package -Pbuild -Doptions=inactive'
                     //COMMIT MAVEN PROXY
-                    sh 'git pull origin master'
+                    sh 'git pull https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                     sh 'git add -A apigee'
                     sh 'git commit -m "proxy commit"'
                     sh 'git tag -a petstore-$BUILD_NUMBER -m "Jenkins"'
