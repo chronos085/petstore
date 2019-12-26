@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><ProxyEndpoint name="default">
   <Description>Swagger Petstore</Description>
-  <PreFlow name="PreFlow">&lt;Request&gt;&lt;Step&gt;&lt;Name&gt;sf-security-oauth&lt;/Name&gt;&lt;/Step&gt;&lt;/Request&gt;</PreFlow>
+  <PreFlow name="PreFlow">
+    <Request/>
+    <Response/>
+  </PreFlow>
   <Flows>
     <Flow name="getPetById">
       <Condition>(proxy.pathsuffix MatchesPath "/pet/{petId}") and (request.verb = "GET")</Condition>
