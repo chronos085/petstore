@@ -12,7 +12,7 @@
                             "value": "/petstore"
                         },{
                             "xpath": "/ProxyEndpoint/PreFlow/Request",
-                            "value": "&lt;Step&gt;&lt;Name&gt;sf-security-oauth&lt;/Name&gt;&lt;/Step&gt;"
+                            "value": "<Step><Name>sf-security-oauth</Name></Step>"
                         }
                     ]
                 }
