@@ -10,9 +10,6 @@
                         {
                             "xpath": "/ProxyEndpoint/HTTPProxyConnection/BasePath",
                             "value": "/petstore"
-                        },{
-                            "xpath": "/ProxyEndpoint/PreFlow/Request/Step/Name",
-                            "value": "sf-security-oauth"
                         }
                     ]
                 }
