@@ -37,6 +37,7 @@ pipeline {
                     sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/sf-security-oauth.xml apigee/proxy/apiproxy/policies'
                     //ADD POLICIES XML
                     sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>sf-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
+                    sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
                     //RUN MAVEN
                     sh 'mkdir -p apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
