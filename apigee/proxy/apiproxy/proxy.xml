@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <APIProxy revison="1" name="proxy">
-  <CreatedAt>1577452513</CreatedAt>
+  <CreatedAt>1577452861</CreatedAt>
   <Description>Swagger Petstore</Description>
   <ProxyEndpoints>
     <ProxyEndpoint>default</ProxyEndpoint>
