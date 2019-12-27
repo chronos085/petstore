@@ -39,6 +39,7 @@ pipeline {
                     sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>sf-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
                     //RUN MAVEN
+                    sh 'rm -rf apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
                     sh 'mvn -f apigee/proxy/pom.xml package -Pbuild -Doptions=inactive'
