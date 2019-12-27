@@ -77,9 +77,6 @@ pipeline {
        failure {
            notifySlack('FAILURE')
        }
-       always {
-           notifySlack()
-       }
     }
 }
 
