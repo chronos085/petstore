@@ -65,7 +65,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
-                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o amer-demo16  -e test -n petstore-$BUILD_NUMBER -d apigee/proxy/target'
+                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o amer-demo16  -e test -n petstore-jks -d apigee/proxy/target'
                 }
             }
         }
