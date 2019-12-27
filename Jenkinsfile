@@ -1,6 +1,9 @@
 pipeline {
     agent none
     stages {
+        
+        notifySlack()
+        
         stage('Build Proxy from Spec') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
