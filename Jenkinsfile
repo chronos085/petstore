@@ -12,7 +12,7 @@ pipeline {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
             steps {
-                echo 'stable_revision ${stable_revision}'
+                echo "${stable_revision}"
                 notifySlack('STARTED')
                 //stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
