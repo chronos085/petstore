@@ -12,6 +12,8 @@ pipeline {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
             steps {
+                notifySlack('STARTED')
+                //stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //CREATE PROXY
                     sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
@@ -100,7 +102,7 @@ def notifySlack(String buildStatus = 'STARTED') {
     if (buildStatus == 'STARTED') {
         color = '#636363'
     } else if (buildStatus == 'APPROVE') {
-        color = '#636363'
+        color = '#9128e0'
     } else if (buildStatus == 'SUCCESS') {
         color = '#47ec05'
     } else if (buildStatus == 'UNSTABLE') {
