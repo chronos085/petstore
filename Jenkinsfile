@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     environment {
         org = 'amer-demo16'
         environment = 'test'
@@ -66,6 +66,15 @@ pipeline {
                 notifySlack('APPROVE')
                 timeout(time: 2, unit: 'DAYS') {
                     input 'Do you want to Approve?'
+                }
+            }
+        }
+        stage('GET Stable Revision') {
+            agent any
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
+                    env.stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+                    echo "${stable_revision}"
                 }
             }
         }
