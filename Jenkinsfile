@@ -13,7 +13,7 @@ pipeline {
             }
             steps {
                 notifySlack('STARTED')
-                //stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+                stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //CREATE PROXY
                     sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
