@@ -1,5 +1,10 @@
 pipeline {
     agent none
+    environment {
+        org = 'amer-demo16'
+        proxy = 'petstore-jks'
+        stable_revision = sh(script: 'curl -H "Authorization: Basic $base64encoded" "https://api.enterprise.apigee.com/v1/organizations/$org/apis/$proxy/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+    }
     stages {
         stage('Build Proxy from Spec') {
             agent {
@@ -66,7 +71,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
-                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o amer-demo16  -e test -n petstore-jks -d apigee/proxy/target'
+                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e test -n $proxy -d apigee/proxy/target'
                 }
             }
         }
