@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment {
         org = 'amer-demo16'
         environment = 'test'
@@ -70,7 +70,6 @@ pipeline {
             }
         }
         stage('GET Stable Revision') {
-            agent any
             steps {
                 withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
                     stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
