@@ -3,7 +3,7 @@ pipeline {
     environment {
         org = 'amer-demo16'
         proxy = 'petstore-jks'
-        stable_revision = sh(script: 'curl -H "Authorization: Basic $base64encoded" "https://api.enterprise.apigee.com/v1/organizations/${org}/apis/${proxy}/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+        //stable_revision = sh(script: 'curl -H "Authorization: Basic $base64encoded" "https://api.enterprise.apigee.com/v1/organizations/${org}/apis/${proxy}/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
     }
     stages {
         stage('Build Proxy from Spec') {
