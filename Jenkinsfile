@@ -77,6 +77,9 @@ pipeline {
        failure {
            notifySlack('FAILURE')
        }
+       unstable {
+           notifySlack('UNSTABLE')
+       }
     }
 }
 
