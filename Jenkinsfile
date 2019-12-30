@@ -4,9 +4,7 @@ pipeline {
         org = 'amer-demo16'
         environment = 'test'
         proxy = 'petstore-jks'
-        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
-            stable_revision = sh(script: 'curl -u $GIT_USERNAME:$GIT_PASSWORD "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()   
-        }
+        stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
     }
     stages {
         stage('Build Proxy from Spec') {
