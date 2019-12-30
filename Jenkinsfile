@@ -80,6 +80,9 @@ pipeline {
        unstable {
            notifySlack('UNSTABLE')
        }
+       aborted {
+           notifySlack('ABORTED')
+       }
     }
 }
 
@@ -93,6 +96,8 @@ def notifySlack(String buildStatus = 'STARTED') {
         color = '#47ec05'
     } else if (buildStatus == 'UNSTABLE') {
         color = '#d5ee0d'
+    } else if (buildStatus == 'ABORTED') {
+        color = '#636363'
     } else {
         color = '#ec2805'
     }
