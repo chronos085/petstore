@@ -2,6 +2,7 @@ pipeline {
     agent none
     environment {
         org = 'amer-demo16'
+        environment = 'test'
         proxy = 'petstore-jks'
         //stable_revision = sh(script: 'curl -H "Authorization: Basic $base64encoded" "https://api.enterprise.apigee.com/v1/organizations/${org}/apis/${proxy}/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
     }
@@ -65,13 +66,13 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Proxy to Enviroment') {
+        stage('Deploy Proxy to Environment') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
-                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e test -n $proxy -d apigee/proxy/target'
+                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e $environment -n $proxy -d apigee/proxy/target'
                 }
             }
         }
