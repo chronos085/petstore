@@ -4,7 +4,6 @@ pipeline {
         org = 'amer-demo16'
         environment = 'test'
         proxy = 'petstore-jks'
-        LS = "${sh(script:'ls -lah', returnStdout: true)}"
         //stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
     }
     stages {
