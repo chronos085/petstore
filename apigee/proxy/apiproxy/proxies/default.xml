@@ -2,7 +2,7 @@
 <ProxyEndpoint name="default">
   <Description>Swagger Petstore</Description>
   <PreFlow name="PreFlow">
-    <Request><Step><Name>sf-security-oauth</Name></Step></Request>
+    <Request/>
     <Response/>
   </PreFlow>
   <Flows>
