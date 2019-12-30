@@ -54,6 +54,7 @@ pipeline {
         }
         stage('Promotion') {
             steps {
+                notifySlack('STARTED')
                 timeout(time: 2, unit: 'DAYS') {
                     input 'Do you want to Approve?'
                 }
@@ -97,7 +98,7 @@ def notifySlack(String buildStatus = 'STARTED') {
     } else if (buildStatus == 'UNSTABLE') {
         color = '#d5ee0d'
     } else if (buildStatus == 'ABORTED') {
-        color = '#636363'
+        color = '#000000'
     } else {
         color = '#ec2805'
     }
