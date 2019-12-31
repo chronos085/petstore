@@ -83,7 +83,10 @@ pipeline {
                         }
                     } catch (err) {
                         echo err.getMessage()
-                        echo "Error detected, but we will continue."
+                        withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
+                            sh 'apigeetool deployExistingRevision  -u $API_USERNAME -p $API_PASSWORD -o $org  -e $environment -n $proxy -r $stable_revision'
+                        }
+                        notifySlack('UNDEPLOY')
                     }
                 }
             }
@@ -119,6 +122,8 @@ def notifySlack(String buildStatus = 'STARTED') {
         color = '#d5ee0d'
     } else if (buildStatus == 'ABORTED') {
         color = '#000000'
+    } else if (buildStatus == 'UNDEPLOY') {
+        color = '#ec2805'
     } else {
         color = '#ec2805'
     }
