@@ -4,8 +4,7 @@ pipeline {
         org = 'amer-demo16'
         environment = 'test'
         proxy = 'petstore-jks'
-        base64 = 'bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI='
-        //stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+        base64 = credentials('apigee-secret-key')
     }
     stages {
         stage('Build Proxy from Spec') {
@@ -78,6 +77,7 @@ pipeline {
             steps {
                 script {
                     try {
+                        echo "${stable_revision}"
                         withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
                             sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e $environment -n $proxy -d apigee/proxy/target'
                         }
