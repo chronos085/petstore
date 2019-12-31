@@ -77,7 +77,6 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo "${stable_revision}"
                         withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
                             sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e $environment -n $proxy -d apigee/proxy/target'
                         }
