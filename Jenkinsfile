@@ -4,6 +4,7 @@ pipeline {
         org = 'amer-demo16'
         environment = 'test'
         proxy = 'petstore-jks'
+        base64 = 'bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI='
         //stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
     }
     stages {
@@ -72,7 +73,7 @@ pipeline {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
             environment{
-                stable_revision = sh(script: 'curl -H "Authorization: Basic bXBvbmNlQGFwaXNlcnZpY2UuY2w6TmFydXRvLjIwMjI=" "https://api.enterprise.apigee.com/v1/organizations/amer-demo16/apis/petstore-jks/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+                stable_revision = sh(script: 'curl -H "Authorization: Basic ${base64}" "https://api.enterprise.apigee.com/v1/organizations/${org}/apis/${proxy}/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
             }
             steps {
                 echo "${stable_revision}"
