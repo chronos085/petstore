@@ -76,9 +76,15 @@ pipeline {
                 stable_revision = sh(script: 'curl -H "Authorization: Basic ${base64}" "https://api.enterprise.apigee.com/v1/organizations/${org}/apis/${proxy}/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
             }
             steps {
-                echo "${stable_revision}"
-                withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
-                    sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e $environment -n $proxy -d apigee/proxy/target'
+                script {
+                    try {
+                        withCredentials([usernamePassword(credentialsId: 'apigee', passwordVariable: 'API_PASSWORD', usernameVariable: 'API_USERNAME')]){
+                            sh 'apigeetool deployproxy  -u $API_USERNAME -p $API_PASSWORD -o $org  -e $environment -n $proxy -d apigee/proxy/target'
+                        }
+                    } catch (err) {
+                        echo err.getMessage()
+                        echo "Error detected, but we will continue."
+                    }
                 }
             }
         }
