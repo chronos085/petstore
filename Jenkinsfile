@@ -72,7 +72,7 @@ pipeline {
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
-		    sh 'git remote update'
+		    sh 'git remote update https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
 		    sh 'git fetch'
 		    sh 'git checkout origin/development'
 		    sh 'git pull . master'
