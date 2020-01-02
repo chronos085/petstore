@@ -72,6 +72,8 @@ pipeline {
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
+		    sh 'git remote update'
+		    sh 'git fetch'
 		    sh 'git checkout origin/development'
 		    sh 'git pull . master'
                 }
