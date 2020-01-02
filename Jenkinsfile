@@ -7,7 +7,7 @@ pipeline {
         base64 = credentials('apigee-secret-key')
     }
     stages {
-        stage('Build Proxy from Spec') {
+        /*stage('Build Proxy from Spec') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -58,7 +58,7 @@ pipeline {
                     sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master  --tags'
                 }
             }
-        }
+        }*/
         stage('Promotion') {
             steps {
                 notifySlack('APPROVE')
