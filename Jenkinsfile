@@ -58,7 +58,7 @@ pipeline {
                     sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master  --tags'
                 }
             }
-        }*/
+        }
         stage('Promotion') {
             steps {
                 notifySlack('APPROVE')
@@ -66,13 +66,13 @@ pipeline {
                     input 'Do you want to Approve?'
                 }
             }
-        }
+        }*/
 	stage('Deliver for Development') {
 	    agent any
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
-		    sh 'git remote update https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
+		    sh 'git update https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
 		    sh 'git fetch'
 		    sh 'git checkout origin/development'
 		    sh 'git pull . master'
