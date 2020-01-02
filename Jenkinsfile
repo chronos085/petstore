@@ -68,6 +68,7 @@ pipeline {
             }
         }
 	stage('Deliver for Development') {
+	    agent any
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
