@@ -72,13 +72,13 @@ pipeline {
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
-		    sh 'git fetch https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
+		    sh 'git fetch --all --prune https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
 		    sh 'git checkout https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git development'
 		    sh 'git pull . master'
                 }
             }
 	}
-        stage('Deploy Proxy to Environment') {
+        /*stage('Deploy Proxy to Environment') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -100,7 +100,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
     post {
        success {
