@@ -72,7 +72,7 @@ pipeline {
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
-		    sh 'git fetch --all --prune https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
+		    sh 'git fetch --all https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git'
 		    sh 'git checkout https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git development'
 		    sh 'git pull . master'
                 }
