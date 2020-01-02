@@ -67,15 +67,15 @@ pipeline {
                 }
             }
         }
-		stage('Deliver for Development') {
-			steps {
+	stage('Deliver for Development') {
+	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //DELIVERY TO DEV
                     sh 'git checkout development'
-					sh 'git pull . master'
+		    sh 'git pull . master'
                 }
             }
-		}
+	}
         stage('Deploy Proxy to Environment') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
