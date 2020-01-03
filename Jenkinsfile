@@ -101,6 +101,23 @@ pipeline {
                 }
             }
         }
+	stage('Integration Tests') {
+            steps {
+                script {
+                    try {
+                        bat "cd $WORKSPACE/test/integration && npm install"
+                        bat "cd $WORKSPACE/test/integration && npm test"
+                    } catch (e) {
+                        throw e
+                    } finally {
+                        // generate cucumber reports in both Test Pass/Fail scenario
+                        bat "cd $WORKSPACE/test/integration && cp reports.json $WORKSPACE"
+                        cucumber fileIncludePattern: 'reports.json'
+                        build job: 'cucumber-report'
+                    }
+                }
+            }
+        }
     }
     post {
        success {
