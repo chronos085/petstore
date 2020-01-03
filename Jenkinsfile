@@ -108,8 +108,10 @@ pipeline {
             steps {
                 script {
                     try {
+			sh 'ls'
                         sh 'cd test/integration && npm install'
-                        sh 'cd test/integration && npm test'
+			sh 'ls'
+                        //sh 'cd test/integration && npm test'
                     } catch (e) {
                         throw e
                     } finally {
