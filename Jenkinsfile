@@ -102,6 +102,7 @@ pipeline {
             }
         }
 	stage('Integration Tests') {
+	    agent any
             steps {
                 script {
                     try {
