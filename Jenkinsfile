@@ -7,7 +7,7 @@ pipeline {
         base64 = credentials('apigee-secret-key')
     }
     stages {
-        /*stage('Build Proxy from Spec') {
+        stage('Build Proxy from Spec') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -66,8 +66,8 @@ pipeline {
                     input 'Do you want to Approve?'
                 }
             }
-        }*/
-	stage('Deliver for Development') {
+        }
+	/*stage('Deliver for Development') {
 	    agent any
 	    steps {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
@@ -77,8 +77,8 @@ pipeline {
 		    sh 'git pull . master'
                 }
             }
-	}
-        /*stage('Deploy Proxy to Environment') {
+	}*/
+        stage('Deploy Proxy to Environment') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -100,7 +100,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
     }
     post {
        success {
