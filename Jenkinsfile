@@ -102,16 +102,13 @@ pipeline {
             }
         }*/
 	stage('Integration Tests') {
-	    agent {
-                docker { image 'chronos085/node-apigee:8-alpine' }
-            }
+	    agent any
             steps {
                 script {
                     try {
-			sh 'ls'
-                        sh 'npm install test/integration'
-			sh 'ls'
-                        //sh 'cd test/integration && npm test'
+			sh 'cd test/integration'
+                        sh 'npm install'
+                        sh 'npm test'
                     } catch (e) {
                         throw e
                     } finally {
