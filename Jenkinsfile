@@ -109,7 +109,7 @@ pipeline {
                 script {
                     try {
 			sh 'ls'
-                        sh 'cd test/integration && chown -R 988:982 "/.npm" && npm install'
+                        sh 'npm install test/integration'
 			sh 'ls'
                         //sh 'cd test/integration && npm test'
                     } catch (e) {
