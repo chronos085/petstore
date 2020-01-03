@@ -111,7 +111,7 @@ pipeline {
                     } catch (e) {
                         throw e
                     } finally {
-                        sh 'cd test/integration && cp reports.json /'
+                        //sh 'cd test/integration && cp reports.json /'
                         cucumber fileIncludePattern: 'reports.json'
                         build job: 'cucumber-report'
                     }
