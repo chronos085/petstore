@@ -108,13 +108,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat "cd test/integration && npm install"
-                        bat "cd test/integration && npm test"
+                        sh 'cd test/integration && npm install'
+                        sh 'cd test/integration && npm test'
                     } catch (e) {
                         throw e
                     } finally {
-                        // generate cucumber reports in both Test Pass/Fail scenario
-                        bat "cd test/integration && cp reports.json /"
+                        sh 'cd test/integration && cp reports.json /'
                         cucumber fileIncludePattern: 'reports.json'
                         build job: 'cucumber-report'
                     }
