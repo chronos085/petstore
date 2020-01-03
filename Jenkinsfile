@@ -102,17 +102,19 @@ pipeline {
             }
         }*/
 	stage('Integration Tests') {
-	    agent any
+	    agent {
+                docker { image 'chronos085/node-apigee:8-alpine' }
+            }
             steps {
                 script {
                     try {
-                        bat "cd $WORKSPACE/test/integration && npm install"
-                        bat "cd $WORKSPACE/test/integration && npm test"
+                        bat "cd test/integration && npm install"
+                        bat "cd test/integration && npm test"
                     } catch (e) {
                         throw e
                     } finally {
                         // generate cucumber reports in both Test Pass/Fail scenario
-                        bat "cd $WORKSPACE/test/integration && cp reports.json $WORKSPACE"
+                        bat "cd test/integration && cp reports.json /"
                         cucumber fileIncludePattern: 'reports.json'
                         build job: 'cucumber-report'
                     }
