@@ -114,12 +114,12 @@ pipeline {
                     } catch (e) {
                         //throw e
 			sh 'cd test/integration && cp reports.json $WORKSPACE'
-                        //cucumber buildStatus: 'FAIL', fileIncludePattern: 'reports.json'
+                        cucumber buildStatus: 'FAIL', fileIncludePattern: 'reports.json'
                     } finally {
                         //sh 'cd test/integration && cp reports.json $WORKSPACE'
                         //cucumber fileIncludePattern: 'reports.json'
 			//cucumberSlackSend(channel: '#apigee', json: '$WORKSPACE/reports.json')
-			reportUrl = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}/cucumber-html-reports/overview-failures.html"
+			reportUrl = "REPORT-TEST: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}/cucumber-html-reports/overview-failures.html"
 			echo "${reportUrl}"
 			slackSend(channel: '#apigee', color: '#64f5df', message: '$reportUrl')
                         //build job: 'cucumber-report'
