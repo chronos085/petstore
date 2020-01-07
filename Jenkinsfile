@@ -157,8 +157,10 @@ def notifySlack(String buildStatus = 'STARTED') {
         color = '#000000'
     } else if (buildStatus == 'UNDEPLOY') {
         color = '#ec2805'
-    } else {
+    } else if (buildStatus == 'FAILURE') {
         color = '#ec2805'
+    }else {
+        color = '#ff8400'
     }
     
     def msg = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}"
