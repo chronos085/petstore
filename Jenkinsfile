@@ -119,8 +119,8 @@ pipeline {
                         //sh 'cd test/integration && cp reports.json $WORKSPACE'
                         //cucumber fileIncludePattern: 'reports.json'
 			//cucumberSlackSend(channel: '#apigee', json: '$WORKSPACE/reports.json')
-			slackSend(channel: '#apigee', json: '$WORKSPACE/reports.json')
-                        build job: 'cucumber-report'
+			slackSend(channel: '#apigee', blocks: '$WORKSPACE/reports.json')
+                        //build job: 'cucumber-report'
                     }
                 }
             }
