@@ -7,7 +7,7 @@ pipeline {
         base64 = credentials('apigee-secret-key')
     }
     stages {
-        stage('Build Proxy from Spec') {
+        /*stage('Build Proxy from Spec') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -66,7 +66,7 @@ pipeline {
                     input 'Do you want to Approve?'
                 }
             }
-        }
+        }*/
 	/*stage('Deliver for Development') {
 	    agent any
 	    steps {
@@ -78,7 +78,7 @@ pipeline {
                 }
             }
 	}*/
-        stage('Deploy Proxy to Environment') {
+        /*stage('Deploy Proxy to Environment') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -100,7 +100,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 	stage('Integration Tests') {
 	    agent any
 	    environment{
@@ -119,7 +119,32 @@ pipeline {
 			sh 'cd test/integration && cp reports.json $WORKSPACE'
                         cucumber buildStatus: 'FAIL', fileIncludePattern: 'reports.json'
                     } finally {
-			slackSend(channel: '#apigee', color: '#64f5df', message: reportUrl)
+			blocks = [
+	[
+		"type": "section",
+		"text": [
+			"type": "mrkdwn",
+			"text": "Hello, Assistant to the Regional Manager Dwight! *Michael Scott* wants to know where you'd like to take the Paper Company investors to dinner tonight.\n\n *Please select a restaurant:*"
+		]
+	],
+    [
+		"type": "divider"
+	],
+	[
+		"type": "section",
+		"text": [
+			"type": "mrkdwn",
+			"text": "*Farmhouse Thai Cuisine*\n:star::star::star::star: 1528 reviews\n They do have some vegan options, like the roti and curry, plus they have a ton of salad stuff and noodles can be ordered without meat!! They have something for everyone here"
+		],
+		"accessory": [
+			"type": "image",
+			"image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/c7ed05m9lC2EmA3Aruue7A/o.jpg",
+			"alt_text": "alt text for image"
+		]
+	]
+]
+			slackSend(channel: '#apigee', color: '#64f5df', blocks: blocks)
+			//slackSend(channel: '#apigee', color: '#64f5df', message: reportUrl)
                         //build job: 'cucumber-report'
                     }
                 }
