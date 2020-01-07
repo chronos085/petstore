@@ -110,12 +110,11 @@ pipeline {
                         sh 'cd test/integration && npm test'
 			    
 			sh 'cd test/integration && cp reports.json $WORKSPACE'
-                        //cucumber buildStatus: 'SUCCESS', fileIncludePattern: 'reports.json'
-			cucumber fileIncludePattern: 'reports.json'
+                        cucumber buildStatus: 'SUCCESS', fileIncludePattern: 'reports.json'
                     } catch (e) {
                         //throw e
 			sh 'cd test/integration && cp reports.json $WORKSPACE'
-                        cucumber buildStatus: 'FAIL', fileIncludePattern: 'reports.json'
+                        //cucumber buildStatus: 'FAIL', fileIncludePattern: 'reports.json'
                     } finally {
                         //sh 'cd test/integration && cp reports.json $WORKSPACE'
                         //cucumber fileIncludePattern: 'reports.json'
