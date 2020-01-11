@@ -100,7 +100,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 	stage('Integration Tests') {
 	    agent any
 	    environment{
@@ -123,7 +123,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
     post {
        success {
@@ -137,6 +137,9 @@ pipeline {
        }
        aborted {
            notifySlack('ABORTED')
+       }
+       always {
+           jiraSendBuildInfo site: 'apiservice2.atlassian.net'
        }
     }
 }
