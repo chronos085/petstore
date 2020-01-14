@@ -139,7 +139,7 @@ pipeline {
            notifySlack('ABORTED')
        }
        always {
-           jiraSendBuildInfo site: 'apiservice2.atlassian.net'
+           jiraSendBuildInfo branch: 'master', site: 'apiservice2.atlassian.net'
        }
     }
 }
