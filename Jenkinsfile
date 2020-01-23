@@ -140,7 +140,7 @@ pipeline {
        }
        always {
            jiraSendBuildInfo branch: 'CA-4', site: 'apiservice2.atlassian.net'
-	   jiraSendDeploymentInfo site: 'apiservice2.atlassian.net', environmentId: 'CA-4', environmentName: 'CA-4', environmentType: 'development'
+	   jiraSendDeploymentInfo site: 'apiservice2.atlassian.net', environmentId: 'us-stg-1', environmentName: 'us-stg-1', environmentType: 'staging'
        }
     }
 }
