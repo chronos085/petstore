@@ -7,7 +7,7 @@ pipeline {
         base64 = credentials('apigee-secret-key')
     }
     stages {
-        /*stage('Build Proxy from Spec') {
+        stage('Build Proxy from Spec') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -20,9 +20,9 @@ pipeline {
                     //TEST CODE PROXY
                     sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                     //COMMIT CREATE PROXY
-                    sh 'git add -A apigee'
-                    sh 'git commit -m "proxy commit"'
-                    sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
+                    //sh 'git add -A apigee'
+                    //sh 'git commit -m "proxy commit"'
+                    //sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                 }
             }
         }
@@ -45,6 +45,8 @@ pipeline {
                     //ADD POLICIES XML
                     sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>sf-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
+		     //TEST CODE PROXY
+                    sh 'apigeelint -s apigee/proxy/apiproxy -f table.js'
                     //RUN MAVEN
                     sh 'rm -rf apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target'
@@ -66,7 +68,7 @@ pipeline {
                     input 'Do you want to Approve?'
                 }
             }
-        }*/
+        }
 	/*stage('Deliver for Development') {
 	    agent any
 	    steps {
@@ -78,7 +80,7 @@ pipeline {
                 }
             }
 	}*/
-        /*stage('Deploy Proxy to Environment') {
+        stage('Deploy Proxy to Environment') {
             agent {
                 docker { image 'chronos085/node-apigee:8-alpine' }
             }
@@ -100,7 +102,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 	stage('Integration Tests') {
 	    agent any
 	    environment{
