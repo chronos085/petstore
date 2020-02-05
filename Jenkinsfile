@@ -49,7 +49,7 @@ pipeline {
                     sh 'rm -rf apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
-                    sh 'mvn -f apigee/proxy/pom.xml install -Pbuild -Doptions=inactive'
+                    sh 'mvn -f apigee/proxy/pom.xml clean install -Pbuild -Doptions=inactive'
                     //COMMIT MAVEN PROXY
                     sh 'git pull https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                     sh 'git add -A apigee'
