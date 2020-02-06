@@ -59,6 +59,11 @@ pipeline {
                     sh 'git commit -m "proxy commit"'
                     sh 'git tag -a petstore-$BUILD_NUMBER -m "Jenkins"'
                     sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master  --tags'
+		    //REMOVE PROXY
+                    sh 'git pull https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
+                    sh 'git rm apigee'
+                    sh 'git commit -m "proxy remove"'
+                    sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                 }
             }
         }
