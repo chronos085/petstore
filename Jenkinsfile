@@ -104,7 +104,7 @@ pipeline {
                 }
             }
         }
-	stage('Integration Tests') {
+	/*stage('Integration Tests') {
 	    agent any
 	    environment{
 		reportUrl = "REPORT-TEST: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}cucumber-html-reports/overview-features.html"	
@@ -126,7 +126,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
     post {
        success {
