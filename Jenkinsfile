@@ -41,12 +41,12 @@ pipeline {
                     sh 'cp -r configs/config.json apigee/proxy'
                     //ADD POLICIES
                     sh 'mkdir -p apigee/proxy/apiproxy/policies'
-                    sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/sf-security-oauth.xml apigee/proxy/apiproxy/policies'
+                    sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/fc-security-oauth.xml apigee/proxy/apiproxy/policies'
                     //ADD TARGETSERVER XML
-                    sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<Properties\\/>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/proxies/default.xml"
+                    sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<Properties\\/>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/targets/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/targets/default.xml.bak'
 		    //ADD POLICIES XML
-                    sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>sf-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
+                    sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>fc-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
                     //RUN MAVEN
                     sh 'rm -rf apigee/proxy/target'
