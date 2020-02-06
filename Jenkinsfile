@@ -42,7 +42,10 @@ pipeline {
                     //ADD POLICIES
                     sh 'mkdir -p apigee/proxy/apiproxy/policies'
                     sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/sf-security-oauth.xml apigee/proxy/apiproxy/policies'
-                    //ADD POLICIES XML
+                    //ADD TARGETSERVER XML
+                    sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<Properties\\/>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/proxies/default.xml"
+                    sh 'rm -rf apigee/proxy/apiproxy/targets/default.xml.bak'
+		    //ADD POLICIES XML
                     sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>sf-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
                     //RUN MAVEN
