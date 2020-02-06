@@ -16,7 +16,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //REMOVE PROXY
                     sh 'git pull https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
-                    sh 'git rm apigee'
+                    sh 'git rm -r apigee'
                     sh 'git commit -m "proxy remove"'
                     sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
 		    //CREATE PROXY
