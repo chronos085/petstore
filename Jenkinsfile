@@ -15,6 +15,7 @@ pipeline {
                 notifySlack('STARTED')
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //CREATE PROXY
+		    sh 'mkdir -p apigee'
                     sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
                     sh 'rm -rf apigee/proxy/apiproxy.zip'
                     //TEST CODE PROXY
@@ -52,7 +53,7 @@ pipeline {
                     sh 'rm -rf apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target'
                     sh 'mkdir -p apigee/proxy/target/apiproxy'
-                    sh 'mvn -f apigee/proxy/pom.xml clean install -Pbuild -Doptions=inactive'
+                    sh 'mvn -f apigee/proxy/pom.xml package -Pbuild -Doptions=inactive'
                     //COMMIT MAVEN PROXY
                     sh 'git pull https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                     sh 'git add -A apigee'
