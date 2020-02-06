@@ -44,8 +44,8 @@ pipeline {
                     sh 'mkdir -p apigee/proxy/apiproxy/policies'
                     sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/fc-security-oauth.xml apigee/proxy/apiproxy/policies'
                     //ADD TARGETSERVER XML
-                    sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<URL>https:\\/\\/petstore.swagger.io\\/v2<\\/URL>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/targets/default.xml"
-                    sh 'rm -rf apigee/proxy/apiproxy/targets/default.xml.bak'
+                    //sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<URL>https:\\/\\/petstore.swagger.io\\/v2<\\/URL>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/targets/default.xml"
+                    //sh 'rm -rf apigee/proxy/apiproxy/targets/default.xml.bak'
 		    //ADD POLICIES XML
                     sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>fc-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
