@@ -15,6 +15,7 @@ pipeline {
                 notifySlack('STARTED')
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                     //CREATE PROXY
+		    sh 'mkdir -p apigee'
                     sh 'openapi2apigee generateApi proxy -s openapi.yaml -d apigee'
                     sh 'rm -rf apigee/proxy/apiproxy.zip'
                     //TEST CODE PROXY
@@ -43,8 +44,8 @@ pipeline {
                     sh 'mkdir -p apigee/proxy/apiproxy/policies'
                     sh 'cp -r ci-apigee/templates/sharedflows/security-oauth/fc-security-oauth.xml apigee/proxy/apiproxy/policies'
                     //ADD TARGETSERVER XML
-                    sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<Properties\\/>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/targets/default.xml"
-                    sh 'rm -rf apigee/proxy/apiproxy/targets/default.xml.bak'
+                    //sh "sed -i.bak '/<HTTPTargetConnection>/,/<\\/HTTPTargetConnection>/ s/<URL>https:\\/\\/petstore.swagger.io\\/v2<\\/URL>/<LoadBalancer><Server name=\"petstore\"\\/><\\/LoadBalancer><Path>\\/<\\/Path>/g' apigee/proxy/apiproxy/targets/default.xml"
+                    //sh 'rm -rf apigee/proxy/apiproxy/targets/default.xml.bak'
 		    //ADD POLICIES XML
                     sh "sed -i.bak '/<PreFlow[[:blank:]]name=\"PreFlow\">/,/<\\/PreFlow>/ s/<Request\\/>/<Request><Step><Name>fc-security-oauth<\\/Name><\\/Step><\\/Request>/g' apigee/proxy/apiproxy/proxies/default.xml"
                     sh 'rm -rf apigee/proxy/apiproxy/proxies/default.xml.bak'
@@ -59,6 +60,11 @@ pipeline {
                     sh 'git commit -m "proxy commit"'
                     sh 'git tag -a petstore-$BUILD_NUMBER -m "Jenkins"'
                     sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master  --tags'
+		    //REMOVE PROXY
+                    sh 'git pull https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
+                    sh 'git rm apigee'
+                    sh 'git commit -m "proxy remove"'
+                    sh 'git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/chronos085/petstore.git HEAD:master'
                 }
             }
         }
